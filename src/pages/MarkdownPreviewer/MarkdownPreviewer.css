@@ -24,7 +24,7 @@
 
 .markdown-previewer-editor-textarea {
   height: 100%;
-  padding: 12px;
+  overflow: auto;
   
   font-size: 16px;
   font-family: "Fira code", "Fira Mono", monospace;
@@ -32,12 +32,11 @@
   background-color: white;
   border: 2px solid var(--secondary);
   border-radius: 8px;
-
+  
   resize: none;
 }
 
 .markdown-previewer-editor-textarea textarea {
-  max-height: 100%;
   outline: none;
 }
 

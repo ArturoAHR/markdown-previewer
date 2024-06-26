@@ -119,20 +119,21 @@ export const MarkdownPreviewer = () => {
             />
           </div>
         </div>
-        <Editor
-          className="markdown-previewer-editor-textarea"
-          value={inputText}
-          onValueChange={(text) => setInputText(text)}
-          highlight={(text) => highlight(text, languages.markdown, "")}
-          padding={12}
-          style={{
-            fontSize: markdownEditorSettings.fontSize,
-            lineHeight: 1.5,
-            overflow: "auto",
-            backgroundColor:
-              themeBackgroundColors[markdownEditorSettings.theme],
-          }}
-        />
+        <div className="markdown-previewer-editor-textarea">
+          <Editor
+            className=""
+            value={inputText}
+            onValueChange={(text) => setInputText(text)}
+            highlight={(text) => highlight(text, languages.markdown, "")}
+            padding={12}
+            style={{
+              fontSize: markdownEditorSettings.fontSize,
+              lineHeight: 1.5,
+              backgroundColor:
+                themeBackgroundColors[markdownEditorSettings.theme],
+            }}
+          />
+        </div>
       </div>
       <div className="markdown-previewer-preview">
         <div className="markdown-previewer-preview-header">
