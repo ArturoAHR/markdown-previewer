@@ -28,7 +28,9 @@ export const useSanitizeHtml = () => {
       "a",
     ],
     allowedAttributes: {
-      a: ["href"],
+      p: ["align"],
+      a: ["href", "target"],
+      img: ["src", "width", "height", "alt"],
     },
   };
 
