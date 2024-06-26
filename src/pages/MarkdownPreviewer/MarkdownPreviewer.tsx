@@ -1,4 +1,9 @@
+import { highlight, languages } from "prismjs";
+import "prismjs/components/prism-markdown";
+import "prismjs/themes/prism.css"; // Import a PrismJS theme
 import { useState } from "react";
+import Editor from "react-simple-code-editor";
+
 import { useDebounce } from "../../hooks/useDebounce";
 import { useMarked } from "../../hooks/useMarked";
 
@@ -15,10 +20,13 @@ export const MarkdownPreviewer = () => {
         <div className="markdown-previewer-editor-label">
           Introduce your text:
         </div>
-        <textarea
+        <Editor
           className="markdown-previewer-editor-textarea"
-          placeholder="Enter some markdown"
-          onChange={(e) => setInputText(e.target.value)}
+          value={inputText}
+          onValueChange={(text) => setInputText(text)}
+          highlight={(text) => highlight(text, languages.markdown, "")}
+          padding={12}
+          style={{ overflow: "auto" }}
         />
       </div>
       <div className="markdown-previewer-preview">
