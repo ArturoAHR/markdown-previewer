@@ -20,6 +20,7 @@ export const useSanitizeHtml = () => {
       "ol",
       "li",
       "blockquote",
+      "pre",
       "code",
       "hr",
       "table",
