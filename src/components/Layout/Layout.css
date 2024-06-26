@@ -1,0 +1,41 @@
+.layout {
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-header {
+  min-height: 72px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+  
+  background-color: var(--primary);
+  border-bottom: 2px solid var(--secondary);
+}
+
+.layout-content-container {
+  width: 100vw;
+  height: calc(100vh - 72px);
+  
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  
+  overflow: auto;
+}
+
+.layout-content {
+  width: 100%;
+  max-width: var(--contents-main-width);
+  
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
