@@ -1,18 +1,26 @@
 import { highlight, languages } from "prismjs";
 import "prismjs/components/prism-markdown";
 import "prismjs/themes/prism.css"; // Import a PrismJS theme
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Editor from "react-simple-code-editor";
 
 import { useDebounce } from "../../hooks/useDebounce";
 import { useMarked } from "../../hooks/useMarked";
 
+import { Select } from "../../components/Select/Select";
+import { MarkdownEditorSettings } from "../../types/markdown-editor-settings";
 import "./MarkdownPreviewer.css";
 
 export const MarkdownPreviewer = () => {
   const [inputText, setInputText] = useState("");
   const debouncedInputText = useDebounce(inputText, 500);
   const { htmlMarkdown } = useMarked({ inputText: debouncedInputText });
+
+  const [markdownEditorSettings, setMarkdownEditorSettings] =
+    useState<MarkdownEditorSettings>({
+      fontSize: 14,
+      theme: "prism",
+    });
 
   const downloadMarkdownHtml = () => {
     const element = document.createElement("a");
@@ -29,11 +37,44 @@ export const MarkdownPreviewer = () => {
     document.body.removeChild(element);
   };
 
+  const fontSizeOptions = useMemo(() => {
+    const baseFontSize = 8;
+    const options = [];
+
+    for (let i = 0; i <= 10; i++) {
+      const fontSize = baseFontSize + i * 2;
+
+      options.push({
+        label: `${fontSize}px`,
+        value: fontSize,
+      });
+    }
+
+    return options;
+  }, []);
+
+  const changeEditorSettings = (settings: Partial<MarkdownEditorSettings>) => {
+    setMarkdownEditorSettings({
+      ...markdownEditorSettings,
+      ...settings,
+    });
+  };
+
   return (
     <div className="markdown-previewer">
       <div className="markdown-previewer-editor">
-        <div className="markdown-previewer-editor-label">
-          Introduce your text:
+        <div className="markdown-previewer-editor-header">
+          <div className="markdown-previewer-editor-header-label">
+            Introduce your text:
+          </div>
+          <Select
+            className="markdown-previewer-editor-header-select font-size"
+            options={fontSizeOptions}
+            value={markdownEditorSettings.fontSize}
+            onChange={(fontSize) =>
+              changeEditorSettings({ fontSize: +fontSize })
+            }
+          />
         </div>
         <Editor
           className="markdown-previewer-editor-textarea"
@@ -41,7 +82,11 @@ export const MarkdownPreviewer = () => {
           onValueChange={(text) => setInputText(text)}
           highlight={(text) => highlight(text, languages.markdown, "")}
           padding={12}
-          style={{ overflow: "auto" }}
+          style={{
+            fontSize: markdownEditorSettings.fontSize,
+            lineHeight: 1.5,
+            overflow: "auto",
+          }}
         />
       </div>
       <div className="markdown-previewer-preview">

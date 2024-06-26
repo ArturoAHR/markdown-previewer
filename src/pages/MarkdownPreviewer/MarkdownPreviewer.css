@@ -16,7 +16,7 @@
   gap: 8px;
 }
 
-.markdown-previewer-editor-label, .markdown-previewer-preview-header-label {
+.markdown-previewer-editor-header-label, .markdown-previewer-preview-header-label {
   font-weight: 600;
   color: var(--text-primary);
 }
@@ -59,7 +59,7 @@
   overflow: auto;
 }
 
-.markdown-previewer-preview-header {
+.markdown-previewer-preview-header, .markdown-previewer-editor-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
